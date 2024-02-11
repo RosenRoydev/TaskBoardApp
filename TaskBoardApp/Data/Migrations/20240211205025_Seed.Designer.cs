@@ -12,8 +12,8 @@ using TaskBoardApp.Data;
 namespace TaskBoardApp.Data.Migrations
 {
     [DbContext(typeof(TaskBoardAppDbContext))]
-    [Migration("20240211203953_SeedDates")]
-    partial class SeedDates
+    [Migration("20240211205025_Seed")]
+    partial class Seed
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -143,17 +143,17 @@ namespace TaskBoardApp.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "1d521d0d-a216-4b2b-9896-9192498662bc",
+                            Id = "f0ecad61-bbfa-447f-8533-2501f6ffad3b",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "e800b2ba-9fc8-40bb-9083-40264253c0ea",
+                            ConcurrencyStamp = "db2fde33-bed6-4e25-9cf3-45e530c5e510",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
-                            NormalizedUserName = "ROSEN111@ABV.BG",
-                            PasswordHash = "AQAAAAEAACcQAAAAEASy6zo1qUwCPRmevbZgifQobbWaHFwUViT4bk88LZ7GAVw0kWu8MZUoxo/ODo8g4g==",
+                            NormalizedUserName = "ROSEN.ROYDEV@GMAIL.COM",
+                            PasswordHash = "AQAAAAEAACcQAAAAEIdgHU8PKhvko2kEciAU9NOFw7dErQ1PZ38x838Ii5N3HrLAABHRmmEo6yHQCRTPhw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "95a18ae6-6977-4139-a76b-28736ca9de5e",
+                            SecurityStamp = "451588b6-6603-403e-9529-ba7d0c5d629b",
                             TwoFactorEnabled = false,
-                            UserName = "rosen111@abv.bg"
+                            UserName = "rosen.roydev@gmail.com"
                         });
                 });
 
@@ -318,36 +318,36 @@ namespace TaskBoardApp.Data.Migrations
                         {
                             Id = 1,
                             BoardId = 1,
-                            CreatedOn = new DateTime(2023, 7, 26, 22, 39, 53, 147, DateTimeKind.Local).AddTicks(726),
+                            CreatedOn = new DateTime(2023, 7, 26, 22, 50, 24, 775, DateTimeKind.Local).AddTicks(2528),
                             Description = "Implement better styling for all public pages",
-                            OwnerId = "1d521d0d-a216-4b2b-9896-9192498662bc",
+                            OwnerId = "f0ecad61-bbfa-447f-8533-2501f6ffad3b",
                             Title = "Improve CSS styles"
                         },
                         new
                         {
                             Id = 2,
                             BoardId = 1,
-                            CreatedOn = new DateTime(2023, 9, 11, 22, 39, 53, 147, DateTimeKind.Local).AddTicks(781),
+                            CreatedOn = new DateTime(2023, 9, 11, 22, 50, 24, 775, DateTimeKind.Local).AddTicks(2589),
                             Description = "Create Android client app for the TaskBoard RESTful API",
-                            OwnerId = "1d521d0d-a216-4b2b-9896-9192498662bc",
+                            OwnerId = "f0ecad61-bbfa-447f-8533-2501f6ffad3b",
                             Title = "Android Client App"
                         },
                         new
                         {
                             Id = 3,
                             BoardId = 2,
-                            CreatedOn = new DateTime(2024, 1, 11, 22, 39, 53, 147, DateTimeKind.Local).AddTicks(788),
+                            CreatedOn = new DateTime(2024, 1, 11, 22, 50, 24, 775, DateTimeKind.Local).AddTicks(2595),
                             Description = "Create Windows Forms desktop app client for the TaskBoard RESTful API",
-                            OwnerId = "1d521d0d-a216-4b2b-9896-9192498662bc",
+                            OwnerId = "f0ecad61-bbfa-447f-8533-2501f6ffad3b",
                             Title = "Desktop Client App"
                         },
                         new
                         {
                             Id = 4,
                             BoardId = 3,
-                            CreatedOn = new DateTime(2023, 2, 11, 22, 39, 53, 147, DateTimeKind.Local).AddTicks(792),
+                            CreatedOn = new DateTime(2023, 2, 11, 22, 50, 24, 775, DateTimeKind.Local).AddTicks(2600),
                             Description = "Implement [Create Task] page for adding new tasks",
-                            OwnerId = "1d521d0d-a216-4b2b-9896-9192498662bc",
+                            OwnerId = "f0ecad61-bbfa-447f-8533-2501f6ffad3b",
                             Title = "Create Tasks"
                         });
                 });

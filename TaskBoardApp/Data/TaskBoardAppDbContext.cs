@@ -110,8 +110,8 @@ namespace TaskBoardApp.Data
 
             TestUser = new IdentityUser()
             {
-                UserName = "rosen111@abv.bg",
-                NormalizedUserName = "ROSEN111@ABV.BG",
+                UserName = "rosen.roydev@gmail.com",
+                NormalizedUserName = "ROSEN.ROYDEV@GMAIL.COM",
             };
 
             TestUser.PasswordHash = hasher.HashPassword(TestUser, "123456");

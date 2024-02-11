@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace TaskBoardApp.Data.Migrations
 {
-    public partial class SeedDates : Migration
+    public partial class Seed : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -54,7 +54,7 @@ namespace TaskBoardApp.Data.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { "1d521d0d-a216-4b2b-9896-9192498662bc", 0, "e800b2ba-9fc8-40bb-9083-40264253c0ea", null, false, false, null, null, "ROSEN111@ABV.BG", "AQAAAAEAACcQAAAAEASy6zo1qUwCPRmevbZgifQobbWaHFwUViT4bk88LZ7GAVw0kWu8MZUoxo/ODo8g4g==", null, false, "95a18ae6-6977-4139-a76b-28736ca9de5e", false, "rosen111@abv.bg" });
+                values: new object[] { "f0ecad61-bbfa-447f-8533-2501f6ffad3b", 0, "db2fde33-bed6-4e25-9cf3-45e530c5e510", null, false, false, null, null, "ROSEN.ROYDEV@GMAIL.COM", "AQAAAAEAACcQAAAAEIdgHU8PKhvko2kEciAU9NOFw7dErQ1PZ38x838Ii5N3HrLAABHRmmEo6yHQCRTPhw==", null, false, "451588b6-6603-403e-9529-ba7d0c5d629b", false, "rosen.roydev@gmail.com" });
 
             migrationBuilder.InsertData(
                 table: "Boards",
@@ -71,10 +71,10 @@ namespace TaskBoardApp.Data.Migrations
                 columns: new[] { "Id", "BoardId", "CreatedOn", "Description", "OwnerId", "Title" },
                 values: new object[,]
                 {
-                    { 1, 1, new DateTime(2023, 7, 26, 22, 39, 53, 147, DateTimeKind.Local).AddTicks(726), "Implement better styling for all public pages", "1d521d0d-a216-4b2b-9896-9192498662bc", "Improve CSS styles" },
-                    { 2, 1, new DateTime(2023, 9, 11, 22, 39, 53, 147, DateTimeKind.Local).AddTicks(781), "Create Android client app for the TaskBoard RESTful API", "1d521d0d-a216-4b2b-9896-9192498662bc", "Android Client App" },
-                    { 3, 2, new DateTime(2024, 1, 11, 22, 39, 53, 147, DateTimeKind.Local).AddTicks(788), "Create Windows Forms desktop app client for the TaskBoard RESTful API", "1d521d0d-a216-4b2b-9896-9192498662bc", "Desktop Client App" },
-                    { 4, 3, new DateTime(2023, 2, 11, 22, 39, 53, 147, DateTimeKind.Local).AddTicks(792), "Implement [Create Task] page for adding new tasks", "1d521d0d-a216-4b2b-9896-9192498662bc", "Create Tasks" }
+                    { 1, 1, new DateTime(2023, 7, 26, 22, 50, 24, 775, DateTimeKind.Local).AddTicks(2528), "Implement better styling for all public pages", "f0ecad61-bbfa-447f-8533-2501f6ffad3b", "Improve CSS styles" },
+                    { 2, 1, new DateTime(2023, 9, 11, 22, 50, 24, 775, DateTimeKind.Local).AddTicks(2589), "Create Android client app for the TaskBoard RESTful API", "f0ecad61-bbfa-447f-8533-2501f6ffad3b", "Android Client App" },
+                    { 3, 2, new DateTime(2024, 1, 11, 22, 50, 24, 775, DateTimeKind.Local).AddTicks(2595), "Create Windows Forms desktop app client for the TaskBoard RESTful API", "f0ecad61-bbfa-447f-8533-2501f6ffad3b", "Desktop Client App" },
+                    { 4, 3, new DateTime(2023, 2, 11, 22, 50, 24, 775, DateTimeKind.Local).AddTicks(2600), "Implement [Create Task] page for adding new tasks", "f0ecad61-bbfa-447f-8533-2501f6ffad3b", "Create Tasks" }
                 });
 
             migrationBuilder.CreateIndex(
@@ -99,7 +99,7 @@ namespace TaskBoardApp.Data.Migrations
             migrationBuilder.DeleteData(
                 table: "AspNetUsers",
                 keyColumn: "Id",
-                keyValue: "1d521d0d-a216-4b2b-9896-9192498662bc");
+                keyValue: "f0ecad61-bbfa-447f-8533-2501f6ffad3b");
         }
     }
 }

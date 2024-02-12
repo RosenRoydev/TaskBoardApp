@@ -1,4 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using System.Security.Claims;
 using TaskBoardApp.Data;
 using TaskBoardApp.Models.Task;
@@ -9,6 +12,7 @@ using Task = TaskBoardApp.Data.Models.Task;
 
 namespace TaskBoardApp.Controllers
 {
+    [Authorize]
     public class TaskController : Controller
     {
         private readonly TaskBoardAppDbContext data;
@@ -23,60 +27,58 @@ namespace TaskBoardApp.Controllers
         }
 
         [HttpGet]
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
-            TaskFormModel taskModel = new TaskFormModel()
-            {
-                // Populate the Boards property
-                Boards = GetBoards()
-            };
+            var model = new TaskFormModel();
+            model.Boards = await GetBoards();
 
-            return View(taskModel);
+            return View(model);
         }
 
         [HttpPost]
-        public async Task <IActionResult> Create(TaskFormModel taskFormModel)
+        public async Task<IActionResult> Create(TaskFormModel model)
         {
-            taskFormModel.Boards = GetBoards();
+            model.Boards = await GetBoards();
 
-            if (!GetBoards().Any(b => b.Id == taskFormModel.BoardId))
+            if (!(await GetBoards()).Any(b => b.Id == model.BoardId))
             {
-                ModelState.AddModelError(nameof(taskFormModel), "Board does not exist");
+                ModelState.AddModelError(nameof(model), "Board does not exist");
             }
 
             string currentUserId = GetUserId();
 
             if (!ModelState.IsValid)
             {
-                taskFormModel.Boards = GetBoards();
+                model.Boards = await GetBoards();
 
-                return View (taskFormModel);
+                return View(model);
             }
-
-            Task task = new Task()
+             
+            var entity = new Task()
             {
-                Title = taskFormModel.Title,
-                Description = taskFormModel.Description,
+                Title = model.Title,
+                Description = model.Description,
                 CreatedOn = DateTime.Now,
-                BoardId = taskFormModel.BoardId,
+                BoardId = model.BoardId,
                 OwnerId = currentUserId
             };
 
             var boards = data.Boards;
 
-            await data.Tasks.AddAsync(task);
+            await data.Tasks.AddAsync(entity);
             await data.SaveChangesAsync();
 
-            return RedirectToAction("All","Board");
+            return RedirectToAction("Index", "Board");
         }
-        private IEnumerable<TaskBoardModel> GetBoards()
-         => data.Boards.Select(x => new TaskBoardModel
-         {
-             Id = x.Id,
-             Name = x.Name,
-         });
-
-        private string GetUserId()
-            => User.FindFirstValue(ClaimTypes.NameIdentifier);
+        public async Task<IEnumerable<TaskBoardModel>> GetBoards()
+        {
+            return await data.Boards.Select(x => new TaskBoardModel
+            {
+                Id = x.Id,
+                Name = x.Name,
+            }).ToListAsync();
+        }
+            private string GetUserId()
+                => User.FindFirstValue(ClaimTypes.NameIdentifier);
+        }
     }
-}

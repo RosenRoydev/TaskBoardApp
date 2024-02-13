@@ -71,6 +71,7 @@ namespace TaskBoardApp.Controllers
             return RedirectToAction("All", "Board");
         }
 
+        [HttpGet]
         public async Task<IActionResult> Details(int id)
         {
             var task = await data.Tasks
@@ -91,6 +92,116 @@ namespace TaskBoardApp.Controllers
             }
 
             return View(task);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Edit(int id)
+        {
+            var task = await data.Tasks.FindAsync(id);
+
+            if (task == null)
+            {
+                return BadRequest();
+            }
+
+            string currentUserId = GetUserId();
+            if (currentUserId != task.OwnerId)
+            {
+                return Unauthorized();
+            }
+
+            TaskFormModel model = new TaskFormModel()
+            {
+                Title = task.Title,
+                Description = task.Description,
+                BoardId = task.BoardId,
+                Boards = await GetBoards()
+            };
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult>Edit(int id,TaskFormModel task)
+        {
+            var model = await data.Tasks.FindAsync(id);
+            if (model == null)
+            {
+                return BadRequest();
+            }
+
+            string currentUserId = GetUserId();
+
+            if (currentUserId != model.OwnerId) 
+            { 
+              
+                return Unauthorized();
+            
+            }
+           
+
+
+            if (!ModelState.IsValid)
+            {
+                task.Boards = await GetBoards();
+
+                return View(task);  
+            }
+
+            model.Title = task.Title;
+            model.Description = task.Description;
+            model.BoardId = task.BoardId;
+
+            await data.SaveChangesAsync();
+            return RedirectToAction("All", "Board");
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var task = await data.Tasks.FindAsync(id);
+
+            if (task == null)
+            {
+                return BadRequest();
+            }
+
+            string currentUserId = GetUserId();
+            if (currentUserId != task.OwnerId)
+            {
+                return Unauthorized();
+            }
+
+            TaskViewModel model = new TaskViewModel()
+            {
+                Id = task.Id,
+                Title = task.Title,
+                Description = task.Description,
+
+            };
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Delete(int id,TaskViewModel model)
+        {
+            var task = await data.Tasks.FindAsync(id);
+            if (task == null)
+            {
+                return BadRequest();
+            }
+
+            string currentUserId = GetUserId();
+            if (currentUserId != task.OwnerId)
+            {
+                return Unauthorized();
+            }
+
+            data.Tasks.Remove(task);
+            await data.SaveChangesAsync();
+
+            return RedirectToAction("All", "Board");
         }
         public async Task<IEnumerable<TaskBoardModel>> GetBoards()
         {

@@ -53,7 +53,7 @@ namespace TaskBoardApp.Controllers
 
                 return View(model);
             }
-             
+
             var entity = new Task()
             {
                 Title = model.Title,
@@ -68,7 +68,29 @@ namespace TaskBoardApp.Controllers
             await data.Tasks.AddAsync(entity);
             await data.SaveChangesAsync();
 
-            return RedirectToAction("Index", "Board");
+            return RedirectToAction("All", "Board");
+        }
+
+        public async Task<IActionResult> Details(int id)
+        {
+            var task = await data.Tasks
+                .Where(t => t.Id == id)
+                .Select(t => new TaskDetailModel
+                {
+                    Id = t.Id,
+                    Title = t.Title,
+                    Description = t.Description,
+                    CreatedOn = t.CreatedOn.ToString("dd/MM/yyyy HH:mm"),
+                    Board = t.Board.Name,
+                    Owner = t.Owner.UserName
+
+                }).FirstOrDefaultAsync();
+            if (task == null)
+            {
+                return BadRequest();
+            }
+
+            return View(task);
         }
         public async Task<IEnumerable<TaskBoardModel>> GetBoards()
         {
@@ -78,7 +100,10 @@ namespace TaskBoardApp.Controllers
                 Name = x.Name,
             }).ToListAsync();
         }
-            private string GetUserId()
-                => User.FindFirstValue(ClaimTypes.NameIdentifier);
-        }
+        private string GetUserId()
+            => User.FindFirstValue(ClaimTypes.NameIdentifier);
     }
+
+
+
+}
